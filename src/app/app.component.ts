@@ -17,13 +17,11 @@ export class AppComponent {
     title: new FormControl('', Validators.required),    
     price: new FormControl(Validators.required, Validators.pattern('^[0-9]+$')),
     description: new FormControl('', Validators.required),
-    category: new FormControl (Validators.required, Validators.pattern('^[0-9]+$')),  
+    categoryId: new FormControl (Validators.required, Validators.pattern('^[0-9]+$')),  
   });   
   onSubmit() {
-    if (this.productForm.valid) {
+    
       console.log('Form Submitted!', this.productForm.value);
-    } else {
-      console.log('Form is invalid');
-    }
+  
   } 
 }
