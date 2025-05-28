@@ -49,27 +49,32 @@
 
 <div class="container">
   <h1>Working with Reactive Forms</h1>
-  <h3>Ingresa tus datos:</h3>
+  <h3>Ingresa el producto:</h3>
   <div class="content">
     
     <br>
-    <form [formGroup] = "productForm" (ngSubmit)="onSubmit()" >
+    <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
       <fieldset>
-        <label for="name">Title:</label>
-        <input type="text" id="title" name="title" required>
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" required formControlName="title">
         
         <label for="price">Price:</label>
-        <input type="number" id="price" name="price" required>
+        <input type="text" id="price" name="price" required formControlName="price">
       </fieldset>
       <fieldset>
         <label for="description">Description:</label>
-        <input type="text" id="description" name="description" required>
+        <input type="text" id="description" name="description" required formControlName="description">
       </fieldset>
-      <fieldset>
+     <fieldset>
         <label for="categoryId"> Category: </label>
-        <input type="number" id="categoryId" name="categoryId" required>  
-      </fieldset>
-      <button type="submit">Submit</button>
+        <select id="categoryId" name="categoryId" formControlName="categoryId" required>
+          <option value="" disabled selected>Select a category</option>
+            @for (category of categories; track category.id) {
+              <option [value]="category.id">{{ category.name }}</option>
+            }
+        </select>
+    </fieldset>
+      <button type="submit" [disabled]="!productForm.valid">Guardar</button>
     </form>
   
   </div>
