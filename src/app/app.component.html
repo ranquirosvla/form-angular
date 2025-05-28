@@ -24,7 +24,7 @@
     font-weight: 500;
     line-height: 100%;
     letter-spacing: -0.125rem;
-    margin: 0;
+    margin: 20px;
     font-family: "Inter Tight", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
       Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
       "Segoe UI Symbol";
@@ -37,26 +37,38 @@
     max-width: 700px;
     margin-bottom: 3rem;
   }
+  
+ h3 {
+    font-size: 1.5rem;
+    color: var(--gray-800);
+    font-weight: 500;
+    margin-bottom: 1rem;
+  } 
 
 </style>
 
 <div class="container">
   <h1>Working with Reactive Forms</h1>
-
+  <h3>Ingresa tus datos:</h3>
   <div class="content">
+    
+    <br>
     <form >
-      <label for="name">Title:</label>
-      <input type="text" id="title" name="title" required>
-      
-      <label for="price">Price:</label>
-      <input type="number" id="price" name="price" required>
-      
-      <label for="description"></label>
-      <input type="text" id="description" name="description" required>
-
-      <label for="category"> </label>
-      <input type="number" id="category" name="category" required>  
-
+      <fieldset>
+        <label for="name">Title:</label>
+        <input type="text" id="title" name="title" required>
+        
+        <label for="price">Price:</label>
+        <input type="number" id="price" name="price" required>
+      </fieldset>
+      <fieldset>
+        <label for="description">Description:</label>
+        <input type="text" id="description" name="description" required>
+      </fieldset>
+      <fieldset>
+        <label for="category"> Category: </label>
+        <input type="number" id="category" name="category" required>  
+      </fieldset>
       <button type="submit">Submit</button>
     </form>
   
