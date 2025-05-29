@@ -74,7 +74,16 @@
             }
         </select>
     </fieldset>
-      <button type="submit" [disabled]="!productForm.valid">Guardar</button>
+    <fieldset>
+        <label for="apiCategoryId">API Category:</label>
+            <select id="apiCategoryId" formControlName="apiCategoryId" required>
+            <option value="" disabled selected>Select an API category</option>
+            @for (cat of apiCategories; track cat.id) {
+            <option [value]="cat.id">{{ cat.name }}</option>
+        }
+          </select>
+    </fieldset>
+    <button type="submit" [disabled]="!productForm.valid">Guardar</button>
     </form>
   
   </div>
