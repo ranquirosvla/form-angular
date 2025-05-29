@@ -39,7 +39,7 @@ export class AppComponent {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        name: 'Contruction',
+        name: 'Contruction', 
         image: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Ftwelcolimited.com%2F2021%2F11%2F27%2Fcontruction%2F&psig=AOvVaw30t-D-ReXPUwvrqcE1CA95&ust=1748568515403000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCLjo67_Dx40DFQAAAAAdAAAAABAE'
       })
     })

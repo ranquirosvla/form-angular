@@ -127,3 +127,87 @@ why the console is not showing the data entered in the input fields?
 
 Resulta que habia olvidado agregar el formControl a cada input en el html.Quedo corregido.
 
+
+Para integrar la API:
+Obtuvimos el codigo del sitio web de Swager, luego le indicamos a copilot que nos generara el codigo para usar ese codigo y hacer la conexion.
+
+Instruccion:
+add to app.component FormGroup a dropdown that is populated with the following request: 
+
+fetch('https://api.escuelajs.co/api/v1/categories', {
+method: 'POST',
+headers: {
+'accept': '/',
+'Content-Type': 'application/json'
+},
+body: JSON.stringify({
+name: 'string',
+image: 'string'
+})
+})
+.then(response => response.json())
+.then(data => console.log(data))
+.catch(error => console.error('Error:', error));
+
+Nos genero el codigo para el archivo TS:
+
+@Component({
+  selector: 'app-root',
+  imports: [ReactiveFormsModule, RouterOutlet],
+  //standalone: true,
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
+})
+export class AppComponent {
+  productForm = new FormGroup({
+    title: new FormControl('', Validators.required),
+    price: new FormControl('', [Validators.required, Validators.pattern('^[0-9]+$')]),
+    description: new FormControl('', Validators.required),
+    categoryId: new FormControl('', [Validators.required, Validators.pattern('^[0-9]+$')]),
+    apiCategoryId: new FormControl('', Validators.required) // New dropdown for API categories
+  });
+
+  categories = [
+    { id: 1, name: 'Electronics' },
+    { id: 2, name: 'Books' },
+    { id: 3, name: 'Clothing' },
+    { id: 4, name: 'Home' }
+  ];
+
+  apiCategories: any[] = []; // Will hold categories from API
+
+  constructor() {
+    // POST request as specified
+    fetch('https://api.escuelajs.co/api/v1/categories', {
+      method: 'POST',
+      headers: {
+        'accept': '*/*',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: 'string',
+        image: 'string'
+      })
+    })
+      .then(response => response.json())
+      .then(data => {
+        // If the API returns a single object, wrap it in an array
+        this.apiCategories = Array.isArray(data) ? data : [data];
+      })
+      .catch(error => console.error('Error:', error));
+  }
+
+y genera este codigo para el HTML:
+<fieldset>
+  <label for="apiCategoryId">API Category:</label>
+  <select id="apiCategoryId" formControlName="apiCategoryId" required>
+    <option value="" disabled selected>Select an API category</option>
+    @for (cat of apiCategories; track cat.id) {
+      <option [value]="cat.id">{{ cat.name }}</option>
+    }
+  </select>
+</fieldset>
+
+se prueba el codigo pero da un error y no muestra nada en el input de la neuva categoria para conectar la API, consultamos con Copilot y nos dice que debemos colocar una palabra especifica en el archivo JSON en lugar de 'string' ya que se trata de un POST, se hizo y funciona bien.
+
+
